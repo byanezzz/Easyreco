@@ -19,6 +19,9 @@ function susccess(position) {
   }
   var gMarker = new google.maps.Marker(objConfMarker);
   gMarker.setIcon('assets/img/icono-bici.png');
+};
+
+/* 
   var gCoder = new google.maps.Geocoder();
   var objInformation = {
     address: 'Eleuterio Ramírez 1027,Santiago,Santiago de Chile'
@@ -51,5 +54,4 @@ function susccess(position) {
     } else {
       alert('No hay ruta establecida en Bici para esta dirección ');
     }
-  }
-};
+  } */
