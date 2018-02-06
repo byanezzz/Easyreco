@@ -1,9 +1,9 @@
 var divMap = document.getElementById('map');
-navigator.geolocation.getCurrentPosition(susccess, error);
+navigator.geolocation.getCurrentPosition(success, error);
 
 function error() {};
 
-function susccess(position) {
+function success(position) {
   var lat = position.coords.latitude;
   var lon = position.coords.longitude;
 
@@ -20,7 +20,18 @@ function susccess(position) {
   var gMarker = new google.maps.Marker(objConfMarker);
   gMarker.setIcon('assets/img/icono-bici.png');
 };
-
+// Autocompletar Input
+var defaultBounds = new google.maps.LatLngBounds(
+  new google.maps.LatLng(-33.8902, 151.1759),
+  new google.maps.LatLng(-33.8474, 1512631)
+);
+var options = {
+  bounds: defaultBounds
+}
+var inputOrigin = document.getElementById('origin');
+var autocompleteOrigin = new google.maps.places.Autocomplete(inputOrigin, options);
+var inputFinal = document.getElementById('final');
+var autocompleteFinal = new google.maps.places.Autocomplete(inputFinal, options);
 /* 
   var gCoder = new google.maps.Geocoder();
   var objInformation = {
