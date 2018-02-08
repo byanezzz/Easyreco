@@ -99,7 +99,6 @@ $('#route').click(function() {
   function getRoute(dataRoute, status) {
     if (status === 'OK') {
       dr.setDirections(dataRoute);
-      //dr.setMap(null);
     } else {
       alert('No hay ruta establecida en Bici para esta dirección ');
     }
