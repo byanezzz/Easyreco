@@ -13,6 +13,10 @@ function initialize() {
   // Try HTML5 geolocation.
 
   $('#find').click(function() {
+    gMap = new google.maps.Map($('#map').get(0), {
+      center: new google.maps.LatLng(-34.397, 150, 644),
+      zoom: 8
+    });
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var lat = position.coords.latitude;
@@ -40,7 +44,6 @@ function initialize() {
 var start;
 var stop;
 $('#origin').change(function() {
-
   var gCoderOrigin = new google.maps.Geocoder();
   var objInformationOrigin = {
     address: $('#origin').val()
@@ -48,7 +51,7 @@ $('#origin').change(function() {
   gCoderOrigin.geocode(objInformationOrigin, coderOrigin);
 
   function coderOrigin(data) {
-    star = data[0].geometry.location; //Lo mismo que el objeto LatLong
+    start = data[0].geometry.location; //Lo mismo que el objeto LatLong
   };
 });
 $('#final').change(function() {
@@ -63,14 +66,18 @@ $('#final').change(function() {
   }
 
 });
+var dr;
 $('#route').click(function() {
-  gMarker.setMap(null);
+  gMap = new google.maps.Map($('#map').get(0), {
+    center: new google.maps.LatLng(-34.397, 150, 644),
+    zoom: 8
+  });
   var objConfigDR = {
     map: gMap,
     suppressMarkers: true
   }
   var startMarker = new google.maps.Marker({
-    position: star,
+    position: start,
     map: gMap,
     icon: 'assets/img/icono-bici.png'
   });
@@ -81,17 +88,18 @@ $('#route').click(function() {
   });
 
   var objConfigDS = {
-    origin: star,
+    origin: start,
     destination: stop,
     travelMode: google.maps.TravelMode.WALKING
   }
   var ds = new google.maps.DirectionsService();
-  var dr = new google.maps.DirectionsRenderer(objConfigDR);
+  dr = new google.maps.DirectionsRenderer(objConfigDR);
   ds.route(objConfigDS, getRoute);
 
   function getRoute(dataRoute, status) {
     if (status === 'OK') {
       dr.setDirections(dataRoute);
+      //dr.setMap(null);
     } else {
       alert('No hay ruta establecida en Bici para esta dirección ');
     }
