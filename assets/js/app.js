@@ -12,27 +12,30 @@ function initialize() {
   var pos = {};
   // Try HTML5 geolocation.
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var lat = position.coords.latitude;
-      var lon = position.coords.longitude;
+  $('#find').click(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
 
-      var gLatLon = new google.maps.LatLng(lat, lon);
-      gMap.setZoom(17);
-      gMap.setCenter(gLatLon);
+        var gLatLon = new google.maps.LatLng(lat, lon);
+        gMap.setZoom(17);
+        gMap.setCenter(gLatLon);
 
-      var objConfMarker = {
-        position: gLatLon,
-        map: gMap
-      }
-      gMarker = new google.maps.Marker(objConfMarker);
-      gMarker.setIcon('assets/img/icono-bici.png');
-    }, function() {
+        var objConfMarker = {
+          position: gLatLon,
+          map: gMap
+        }
+        gMarker = new google.maps.Marker(objConfMarker);
+        gMarker.setIcon('assets/img/icono-bici.png');
+      }, function() {
+        alert('error');
+      });
+    } else {
       alert('error');
-    });
-  } else {
-    alert('error');
-  }
+    }
+  });
+
 }
 var start;
 var stop;
@@ -49,7 +52,6 @@ $('#origin').change(function() {
   };
 });
 $('#final').change(function() {
-
   var gCoderFinal = new google.maps.Geocoder();
   var objInformationFinal = {
     address: $('#final').val()

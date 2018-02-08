@@ -1,7 +1,23 @@
-button {
-  margin-top: 1.3em;
-}
-
-#map {
-  height: 500px;
-}
+  button {
+    margin-top: 1.3em;
+    width: 100%;
+  }
+  
+  input {
+    width: 100%;
+    margin-left: 0.5em;
+  }
+  
+  #map {
+    height: 500px;
+  }
+  
+  @media (max-width: 767px) {
+    #map {
+      height: 450px;
+      margin-top: 1em;
+    }
+    #route {
+      margin-top: 0
+    }
+  }
