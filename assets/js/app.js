@@ -90,7 +90,7 @@ $('#route').click(function() {
   var objConfigDS = {
     origin: start,
     destination: stop,
-    travelMode: google.maps.TravelMode.WALKING
+    travelMode: google.maps.TravelMode.DRIVING
   }
   var ds = new google.maps.DirectionsService();
   dr = new google.maps.DirectionsRenderer(objConfigDR);
@@ -100,19 +100,10 @@ $('#route').click(function() {
     if (status === 'OK') {
       dr.setDirections(dataRoute);
     } else {
-      alert('No hay ruta establecida en Bici para esta dirección ');
+      alert('Sea mas específico con su Origen/Destino ');
     }
   }
 });
 // Autocompletar Input
-var defaultBounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(-33.8902, 151.1759),
-  new google.maps.LatLng(-33.8474, 1512631)
-);
-var options = {
-  bounds: defaultBounds
-}
-var inputOrigin = document.getElementById('origin');
-var autocompleteOrigin = new google.maps.places.Autocomplete(inputOrigin, options);
-var inputFinal = document.getElementById('final');
-var autocompleteFinal = new google.maps.places.Autocomplete(inputFinal, options);
+var autocompleteOrigin = new google.maps.places.SearchBox(document.querySelector("#origin")),
+  autocompleteFinal = new google.maps.places.SearchBox(document.querySelector("#final"));
